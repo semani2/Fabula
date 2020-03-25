@@ -1,6 +1,7 @@
 package com.sai.fabula
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.sai.fabula.database.NewsRepository
 import com.sai.fabula.di.FabulaApiModule
 import com.sai.fabula.di.FabulaDbModule
@@ -18,13 +19,14 @@ class FabulaApp : Application() {
         single { FabulaApiModule() }
         single { FabulaDbModule(this@FabulaApp) }
         single { NewsRepository(get(), get()) }
-        viewModel { MainViewModel() }
+        viewModel { MainViewModel(get()) }
     }
 
     override fun onCreate() {
         super.onCreate()
         initTimber()
         initKoin()
+        Stetho.initializeWithDefaults(this)
     }
 
     private fun initKoin() {

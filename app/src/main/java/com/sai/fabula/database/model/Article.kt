@@ -8,7 +8,7 @@ import com.sai.fabula.database.model.Article.Companion.TABLE_NAME
 data class Article(
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int? = 0,
+    var id: Int = 0,
     var title: String? = null,
     var description: String? = null,
     var author: String? = null,

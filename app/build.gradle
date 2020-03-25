@@ -89,6 +89,9 @@ dependencies {
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
+    // Stetho
+    implementation 'com.facebook.stetho:stetho:1.5.1'
+
     // Testing
     testImplementation 'junit:junit:4.13'
     testImplementation "androidx.arch.core:core-testing:2.1.0"

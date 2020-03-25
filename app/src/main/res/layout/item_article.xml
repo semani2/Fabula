@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="3dp"
+    android:layout_marginBottom="@dimen/dimen_4"
+    android:paddingBottom="@dimen/dimen_4"
     android:background="@color/article_background">
 
     <TextView
@@ -20,8 +21,9 @@
     <TextView
         android:id="@+id/article_author"
         style="@style/ArticleAuthorText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/article_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/article_title"
         tools:text="@tools:sample/full_names" />

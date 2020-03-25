@@ -21,10 +21,11 @@ class NewsRepository(private val fabulaDbModule: FabulaDbModule,
         try {
             val apiResponse = fetchFromApi()
 
-            val remoteNewsArticles = apiResponse.body()
+            val newsApiResponse = apiResponse.body()
 
-            if (apiResponse.isSuccessful && !remoteNewsArticles.isNullOrEmpty()) {
-                saveRemoteData(remoteNewsArticles)
+            if (apiResponse.isSuccessful && newsApiResponse?.status.equals("ok", true)
+                && !newsApiResponse?.articles.isNullOrEmpty()) {
+                saveRemoteData(newsApiResponse?.articles!!)
             } else {
                 emit(State.error<List<Article>>(apiResponse.message()))
             }
@@ -53,13 +54,18 @@ class NewsRepository(private val fabulaDbModule: FabulaDbModule,
         .getAllArticles()
 
     private suspend fun saveRemoteData(remoteArticles: List<com.sai.fabula.api.model.Article>) {
+        fabulaDbModule
+            .getNewsDatabase()
+            .getArticlesDao()
+            .deleteAllPosts()
+
         val articles = remoteArticles.map { apiArticle ->
             Article(
                 title = apiArticle.title,
                 description = apiArticle.description,
                 author = apiArticle.author,
                 url = apiArticle.url,
-                imageUrl = apiArticle.imageUrl,
+                imageUrl = apiArticle.urlToImage,
                 source = apiArticle.source?.name
             )
         }

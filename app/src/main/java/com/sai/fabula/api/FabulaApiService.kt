@@ -8,7 +8,7 @@ import retrofit2.http.GET
  */
 interface FabulaApiService {
 
-    @GET("/top-headlines?country=us&apiKey=bc3c5392175a47509e3de5c96024e920")
+    @GET("top-headlines?country=us&apiKey=bc3c5392175a47509e3de5c96024e920")
     suspend fun getNewsArticles(): ArticlesResponse
 
     companion object {

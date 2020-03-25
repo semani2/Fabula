@@ -35,6 +35,7 @@
     <style name="ArticleAuthorText">
         <item name="android:layout_marginStart">@dimen/dimen_16</item>
         <item name="android:layout_marginTop">@dimen/dimen_8</item>
+        <item name="android:maxLines">2</item>
     </style>
 
     <style name="ArticleImage">

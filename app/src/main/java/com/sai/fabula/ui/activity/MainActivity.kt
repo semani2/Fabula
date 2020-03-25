@@ -1,7 +1,7 @@
 package com.sai.fabula.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sai.fabula.R
@@ -10,16 +10,24 @@ import com.sai.fabula.databinding.ActivityMainBinding
 import com.sai.fabula.ui.adapter.NewsAdapter
 import com.sai.fabula.utils.showToast
 import com.sai.fabula.viewmodel.MainViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+@ExperimentalCoroutinesApi
+class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModel()
 
     private val newsAdapter = NewsAdapter()
 
+    private lateinit var activityViewBinding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
+        activityViewBinding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(activityViewBinding.root)
 
         activityViewBinding.newsRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -61,6 +69,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun showLoading(isLoading: Boolean) {
         activityViewBinding.swipeRefreshLayout.isRefreshing = isLoading
     }
-
-    override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 }
