@@ -1,5 +1,7 @@
 package com.sai.fabula.ui.activity
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -10,6 +12,8 @@ import com.sai.fabula.databinding.ActivityMainBinding
 import com.sai.fabula.ui.adapter.NewsAdapter
 import com.sai.fabula.utils.showToast
 import com.sai.fabula.viewmodel.MainViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private val newsAdapter = NewsAdapter()
 
     private lateinit var activityViewBinding: ActivityMainBinding
+
+    private val compositeDisposable by lazy { CompositeDisposable() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -35,7 +41,24 @@ class MainActivity : AppCompatActivity() {
             adapter = newsAdapter
         }
 
+        newsAdapter.getClickObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                openUrl(it)
+            }
+
         initArticles()
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.dispose()
+        super.onDestroy()
+    }
+
+    private fun openUrl(url: String) {
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = Uri.parse(url)
+        startActivity(i)
     }
 
     private fun initArticles() {

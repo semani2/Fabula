@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dimen_4"
     android:paddingBottom="@dimen/dimen_4"
-    android:background="@color/article_background">
+    android:background="@color/article_background"
+    android:id="@+id/article_item_layout">
 
     <TextView
         android:id="@+id/article_title"

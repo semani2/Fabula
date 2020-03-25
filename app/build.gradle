@@ -92,6 +92,10 @@ dependencies {
     // Stetho
     implementation 'com.facebook.stetho:stetho:1.5.1'
 
+    // RxJava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+
     // Testing
     testImplementation 'junit:junit:4.13'
     testImplementation "androidx.arch.core:core-testing:2.1.0"

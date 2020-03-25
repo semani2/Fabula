@@ -7,8 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import com.sai.fabula.database.model.Article
 import com.sai.fabula.databinding.ItemArticleBinding
 import com.sai.fabula.ui.viewholder.ArticleViewHolder
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.PublishSubject
 
 class NewsAdapter : ListAdapter<Article, ArticleViewHolder>(DIFF_CALLBACK) {
+
+    private val clickSubject: PublishSubject<String> = PublishSubject.create()
 
     private val articleList = mutableListOf<Article>()
 
@@ -24,13 +28,16 @@ class NewsAdapter : ListAdapter<Article, ArticleViewHolder>(DIFF_CALLBACK) {
         notifyDataSetChanged()
     }
 
+    fun getClickObservable() = clickSubject as Observable<String>
+
     private fun createArticleViewHolder(parent: ViewGroup): ArticleViewHolder =
         ArticleViewHolder(
             ItemArticleBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            clickSubject
         )
 
     companion object {
