@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <color name="colorPrimary">#002022</color>
+    <color name="windowBackground">#001719</color>
+    <color name="statusBarColor">#002022</color>
+
+    <color name="textColor">@android:color/white</color>
+    <color name="bulbColor">@android:color/white</color>
+
+    <color name="article_background">#0DFFFFFF</color>
+
+    <color name="imageBackgroundTint">#006064</color>
+</resources>
