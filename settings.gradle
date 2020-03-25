@@ -1,0 +1,2 @@
+rootProject.name='Fabula'
+include ':app'
