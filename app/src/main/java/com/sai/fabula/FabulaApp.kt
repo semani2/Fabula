@@ -1,10 +1,12 @@
 package com.sai.fabula
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import com.facebook.stetho.Stetho
 import com.sai.fabula.database.NewsRepository
 import com.sai.fabula.di.FabulaApiModule
 import com.sai.fabula.di.FabulaDbModule
+import com.sai.fabula.utils.isNight
 import com.sai.fabula.viewmodel.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -26,7 +28,23 @@ class FabulaApp : Application() {
         super.onCreate()
         initTimber()
         initKoin()
-        Stetho.initializeWithDefaults(this)
+        initStetho()
+        setUIMode()
+    }
+
+    private fun setUIMode() {
+        val mode = if (isNight()) {
+            AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+            AppCompatDelegate.MODE_NIGHT_NO
+        }
+
+        AppCompatDelegate.setDefaultNightMode(mode)
+    }
+
+    private fun initStetho() {
+        if (BuildConfig.DEBUG)
+            Stetho.initializeWithDefaults(this)
     }
 
     private fun initKoin() {

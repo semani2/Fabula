@@ -1,9 +1,13 @@
 package com.sai.fabula.ui.activity
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sai.fabula.R
@@ -12,6 +16,7 @@ import com.sai.fabula.databinding.ActivityMainBinding
 import com.sai.fabula.ui.adapter.NewsAdapter
 import com.sai.fabula.utils.showToast
 import com.sai.fabula.viewmodel.MainViewModel
+import com.shreyaspatil.MaterialDialog.MaterialDialog
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -53,6 +58,48 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         compositeDisposable.dispose()
         super.onDestroy()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_theme -> {
+                // Get new mode.
+                val mode =
+                    if ((resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+                        Configuration.UI_MODE_NIGHT_NO
+                    ) {
+                        AppCompatDelegate.MODE_NIGHT_YES
+                    } else {
+                        AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+                    }
+
+                // Change UI Mode
+                AppCompatDelegate.setDefaultNightMode(mode)
+                true
+            }
+
+            else -> true
+        }
+    }
+
+    override fun onBackPressed() {
+        MaterialDialog.Builder(this)
+            .setTitle("Exit?")
+            .setMessage("Are you sure want to exit?")
+            .setPositiveButton("Yes") { dialogInterface, _ ->
+                dialogInterface.dismiss()
+                super.onBackPressed()
+            }
+            .setNegativeButton("No") { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+            .build()
+            .show()
     }
 
     private fun openUrl(url: String) {
