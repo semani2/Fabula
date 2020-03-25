@@ -1,7 +1,8 @@
-package com.sai.fabula
+package com.sai.fabula.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.sai.fabula.R
 
 class MainActivity : AppCompatActivity() {
 
