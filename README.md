@@ -21,6 +21,7 @@ from the local database. Remote data from the API and the local data in the data
   - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - Generates a binding class for each XML layout file present in that module and allows you to more easily write code that interacts with views.
   - [Room](https://developer.android.com/topic/libraries/architecture/room) - SQLite object mapping library.
   - [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
+- [RxJava](https://github.com/ReactiveX/RxAndroid)
 - [Moshi](https://github.com/square/moshi) - A modern JSON library for Kotlin and Java.
 - [Koin](https://insert-koin.io/) - A pragmatic lightweight dependency injection framework for Kotlin developers. Written in pure Kotlin using functional resolution only: no proxy, no code generation, no reflection!
 - [Moshi Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/moshi) - A Converter which uses Moshi for serialization to and from JSON.
