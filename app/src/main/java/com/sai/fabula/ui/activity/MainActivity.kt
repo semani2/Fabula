@@ -46,11 +46,12 @@ class MainActivity : AppCompatActivity() {
             adapter = newsAdapter
         }
 
-        newsAdapter.getClickObservable()
+        val disposable = newsAdapter.getClickObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 openUrl(it)
             }
+        compositeDisposable.add(disposable)
 
         initArticles()
     }
