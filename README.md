@@ -1,6 +1,19 @@
-# Fabula 🗞
+<h1 align="center">Fabula 🗞</h1>
 
-**Fabula** is a sample News Android Application📱built to demonstrate use of Modern Android tools.
+<p align="center">
+  <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
+  <a href="https://android-arsenal.com/api?level=23"><img alt="API" src="https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat"/></a>  
+</p>
+
+<p align="center">  
+<b>Fabula</b> is a sample News Android Application📱built to demonstrate use of Modern Android tools.
+</p>
+</br>
+
+<p align="center">
+<img src="/previews/Screenshot_1593106988.png" width=250/>
+<img src = "/previews/Screenshot_1593106995.png" width=250 />
+</p>
 
 ## About
 Fabula loads the top news articles from the **News Api** and stores it in persistent storage. News articles will be always loaded
