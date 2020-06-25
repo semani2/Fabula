@@ -12,6 +12,6 @@ interface FabulaApiService {
     suspend fun getNewsArticles(): ArticlesResponse
 
     companion object {
-        const val NEWS_API_URL = "http://newsapi.org/v2/"
+        const val NEWS_API_URL = "https://newsapi.org/v2/"
     }
 }
