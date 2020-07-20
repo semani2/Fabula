@@ -1,19 +1,19 @@
 package com.sai.fabula.database
 
 import com.sai.fabula.State
+import com.sai.fabula.api.FabulaApiService
 import com.sai.fabula.database.model.Article
-import com.sai.fabula.di.FabulaApiModule
-import com.sai.fabula.di.FabulaDbModule
 import com.sai.fabula.utils.ArticlesResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import timber.log.Timber
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class NewsRepository(private val fabulaDbModule: FabulaDbModule,
-                     private val fabulaApiModule: FabulaApiModule) {
+class NewsRepository @Inject constructor(private val fabulaDbModule: FabulaNewsDatabase,
+                                         private val fabulaApiModule: FabulaApiService) {
 
     fun getNews() = flow {
         emit(State.Loading<List<Article>>())
@@ -45,17 +45,14 @@ class NewsRepository(private val fabulaDbModule: FabulaDbModule,
 
     private suspend fun fetchFromApi(): ArticlesResponse =
         fabulaApiModule
-            .getFabulaApiService()
             .getNewsArticles()
 
     private suspend fun fetchFromDatabase() = fabulaDbModule
-        .getNewsDatabase()
         .getArticlesDao()
         .getAllArticles()
 
     private suspend fun saveRemoteData(remoteArticles: List<com.sai.fabula.api.model.Article>) {
         fabulaDbModule
-            .getNewsDatabase()
             .getArticlesDao()
             .deleteAllPosts()
 
@@ -71,7 +68,6 @@ class NewsRepository(private val fabulaDbModule: FabulaDbModule,
         }
 
         fabulaDbModule
-            .getNewsDatabase()
             .getArticlesDao()
             .insertArticles(articles)
     }

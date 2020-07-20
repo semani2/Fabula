@@ -1,5 +1,6 @@
 package com.sai.fabula.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +10,7 @@ import com.sai.fabula.utils.ArticleListState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val newsRepository: NewsRepository) : ViewModel() {
+class MainViewModel @ViewModelInject constructor(private val newsRepository: NewsRepository) : ViewModel() {
 
     private val _newsLiveData = MutableLiveData<ArticleListState>()
 
